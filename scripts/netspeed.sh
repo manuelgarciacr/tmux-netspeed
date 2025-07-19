@@ -6,7 +6,7 @@ option_value="$(tmux show-option -gqv '@netspeed-option')"
 
 interface=eno1
 
-exec() 
+loop() 
 {
     while true; do
         SEC=1
@@ -43,7 +43,7 @@ exec()
 
 main() 
 {
-    exec
+    loop
 }
 
 main

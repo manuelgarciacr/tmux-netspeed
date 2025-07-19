@@ -6,9 +6,14 @@ option_value="$(tmux show-option -gqv '@netspeed-option')"
 
 interface=eno1
 
+set_option()
+{
+    tmux set -g @netspeed $1
+}
+
 loop() 
 {
-    #while true; do
+    while true; do
         SEC=1
         FECHA_INI=$(date +%s%N)
         RX1=$(cat /sys/class/net/$interface/statistics/rx_bytes)
@@ -22,28 +27,32 @@ loop()
         if awk -v bps="$BPS" 'BEGIN { exit !(bps > 1000) }'; then
             KBPS=$(awk -v bps="$BPS" 'BEGIN { printf "%.2f\n", bps / 1000 }')
         else
-            echo "$BPS bps"
+            value=$(echo "$BPS bps")
+            set_option $value
             continue
         fi
 
         if awk -v kbps="$KBPS" 'BEGIN { exit !(kbps > 1000) }'; then
             MBPS=$(awk -v kbps="$KBPS" 'BEGIN { printf "%.2f\n", kbps / 1000 }')
         else
-            echo "$KBPS Kbps"
+            value=$(echo "$KBPS Kbps")
+            set_option $value
             continue
         fi
 
         if awk -v mbps="$MBPS" 'BEGIN { exit !(mbps > 1000) }'; then
-            echo $(awk -v mbps="$MBPS" 'BEGIN { printf "%.2f Gbps\n", mbps / 1000 }')
+            value=$(echo $(awk -v mbps="$MBPS" 'BEGIN { printf "%.2f Gbps\n", mbps / 1000 }'))
         else
-            echo $MBPS "Mbps"
+            value=$(echo $MBPS "Mbps")
         fi
-    #done
+
+        set_option $value
+    done
 }
 
 main() 
 {
-    loop
+    $(loop)
 }
 
 main

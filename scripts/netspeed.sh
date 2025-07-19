@@ -6,7 +6,8 @@ option_value="$(tmux show-option -gqv '@netspeed-option')"
 
 interface=eno1
 
-exec() {
+exec() 
+{
     while true; do
         SEC=1
         FECHA_INI=$(date +%s%N)
@@ -40,8 +41,9 @@ exec() {
     done
 }
 
-main() {
-    exec()
+main() 
+{
+    exec
 }
 
 main

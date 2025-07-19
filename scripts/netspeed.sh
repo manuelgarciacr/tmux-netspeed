@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 option_value="$(tmux show-option -gqv '@netspeed-option')"
 #tmux display-message "My plugin option: $option_value"

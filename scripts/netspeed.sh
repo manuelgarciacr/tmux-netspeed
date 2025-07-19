@@ -1,8 +1,7 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 option_value="$(tmux show-option -gqv '@netspeed-option')"
 #tmux display-message "My plugin option: $option_value"
-#!/usr/bin/env bash
 
 interface=eno1
 

@@ -52,7 +52,7 @@ loop()
 
 main() 
 {
-    $(loop)
+    loop
 }
 
 main

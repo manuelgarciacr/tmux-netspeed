@@ -8,7 +8,7 @@ interface=eno1
 
 loop() 
 {
-    while true; do
+    #while true; do
         SEC=1
         FECHA_INI=$(date +%s%N)
         RX1=$(cat /sys/class/net/$interface/statistics/rx_bytes)
@@ -38,7 +38,7 @@ loop()
         else
             echo $MBPS "Mbps"
         fi
-    done
+    #done
 }
 
 main() 
